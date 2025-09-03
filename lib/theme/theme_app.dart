@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
   // Custom colors
@@ -11,7 +12,15 @@ class AppTheme {
   static const Color darkGray = Color(0xFF333333);
 
   // Gradient background
-  static const LinearGradient  backgroundGradient = LinearGradient(
+  static const LinearGradient backgroundGradient = LinearGradient(
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
+    colors: [darkBlue, darkBlue],
+    stops: [0.0, 1.0],
+  );
+
+  // Gradient background
+  static const LinearGradient backgroundGradientButton = LinearGradient(
     begin: Alignment.topCenter,
     end: Alignment.bottomCenter,
     colors: [primaryBlue, darkBlue],
@@ -28,19 +37,17 @@ class AppTheme {
       primary: primaryBlue,
       secondary: accentBlue,
       surface: white,
-   
       onPrimary: white,
       onSecondary: white,
       onSurface: darkGray,
-     
     ),
 
     // App bar theme
-    appBarTheme: const AppBarTheme(
+    appBarTheme: AppBarTheme(
       backgroundColor: Colors.transparent,
       elevation: 0,
-      iconTheme: IconThemeData(color: white),
-      titleTextStyle: TextStyle(
+      iconTheme: const IconThemeData(color: white),
+      titleTextStyle: GoogleFonts.montserrat(
         color: white,
         fontSize: 20,
         fontWeight: FontWeight.w600,
@@ -50,67 +57,69 @@ class AppTheme {
     // Scaffold background
     scaffoldBackgroundColor: Colors.transparent,
 
-    // Text theme
-    textTheme: const TextTheme(
-      displayLarge: TextStyle(
-        color: white,
-        fontSize: 32,
-        fontWeight: FontWeight.bold,
-      ),
-      displayMedium: TextStyle(
-        color: white,
-        fontSize: 28,
-        fontWeight: FontWeight.bold,
-      ),
-      displaySmall: TextStyle(
-        color: white,
-        fontSize: 24,
-        fontWeight: FontWeight.bold,
-      ),
-      headlineLarge: TextStyle(
-        color: white,
-        fontSize: 22,
-        fontWeight: FontWeight.w600,
-      ),
-      headlineMedium: TextStyle(
-        color: white,
-        fontSize: 20,
-        fontWeight: FontWeight.w600,
-      ),
-      headlineSmall: TextStyle(
-        color: white,
-        fontSize: 18,
-        fontWeight: FontWeight.w600,
-      ),
-      titleLarge: TextStyle(
-        color: white,
-        fontSize: 16,
-        fontWeight: FontWeight.w500,
-      ),
-      titleMedium: TextStyle(
-        color: white,
-        fontSize: 14,
-        fontWeight: FontWeight.w500,
-      ),
-      titleSmall: TextStyle(
-        color: white,
-        fontSize: 12,
-        fontWeight: FontWeight.w500,
-      ),
-      bodyLarge: TextStyle(
-        color: white,
-        fontSize: 16,
-        fontWeight: FontWeight.normal,
-      ),
-      bodyMedium: TextStyle(
-        color: white,
-        fontSize: 14,
-        fontWeight: FontWeight.normal,
-      ),
-      bodySmall: TextStyle(
-        color: white,
-        fontSize: 12,
-        fontWeight: FontWeight.normal,
+    // Text theme with Montserrat font
+    textTheme: GoogleFonts.montserratTextTheme(
+      const TextTheme(
+        displayLarge: TextStyle(
+          color: white,
+          fontSize: 32,
+          fontWeight: FontWeight.bold,
+        ),
+        displayMedium: TextStyle(
+          color: white,
+          fontSize: 28,
+          fontWeight: FontWeight.bold,
+        ),
+        displaySmall: TextStyle(
+          color: white,
+          fontSize: 24,
+          fontWeight: FontWeight.bold,
+        ),
+        headlineLarge: TextStyle(
+          color: white,
+          fontSize: 22,
+          fontWeight: FontWeight.w600,
+        ),
+        headlineMedium: TextStyle(
+          color: white,
+          fontSize: 20,
+          fontWeight: FontWeight.w600,
+        ),
+        headlineSmall: TextStyle(
+          color: white,
+          fontSize: 18,
+          fontWeight: FontWeight.w600,
+        ),
+        titleLarge: TextStyle(
+          color: white,
+          fontSize: 16,
+          fontWeight: FontWeight.w500,
+        ),
+        titleMedium: TextStyle(
+          color: white,
+          fontSize: 14,
+          fontWeight: FontWeight.w500,
+        ),
+        titleSmall: TextStyle(
+          color: white,
+          fontSize: 12,
+          fontWeight: FontWeight.w500,
+        ),
+        bodyLarge: TextStyle(
+          color: white,
+          fontSize: 16,
+          fontWeight: FontWeight.normal,
+        ),
+        bodyMedium: TextStyle(
+          color: white,
+          fontSize: 14,
+          fontWeight: FontWeight.normal,
+        ),
+        bodySmall: TextStyle(
+          color: white,
+          fontSize: 12,
+          fontWeight: FontWeight.normal,
+        ),
       ),
     ),
 
