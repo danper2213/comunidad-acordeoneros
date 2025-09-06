@@ -30,8 +30,8 @@ class LoginPage extends StatelessWidget {
         ),
       ),
       Positioned(
-        top: size.height * 0.25,
-        left: size.width * 0.5,
+        top: size.height * 0.3,
+        left: size.width * 0.6,
         child: Image.asset(
           'assets/images/logo.png',
           width: 150,
@@ -39,11 +39,34 @@ class LoginPage extends StatelessWidget {
         ),
       ),
       Positioned(
-        bottom: size.height * 0.1,
+        bottom: 100,
         left: 20.0,
         right: 20.0,
         child: ButtonCustom(text: 'Ingresar', onPressed: () {}),
-      )
+      ),
+      Positioned(
+        bottom: 80,
+        left: 20.0,
+        right: 20.0,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Text(
+              'Aún no tienes una cuenta?',
+              style: AppTheme.lightTheme.textTheme.bodySmall,
+            ),
+            const SizedBox(
+              width: 10,
+            ),
+            Text(
+              'Registrate',
+              style: AppTheme.lightTheme.textTheme.bodySmall?.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
+      ),
     ]);
   }
 }

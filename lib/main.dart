@@ -1,4 +1,4 @@
-import 'package:comunidad_acordeoneros/pages/home.dart';
+
 import 'package:comunidad_acordeoneros/pages/login.dart';
 import 'package:flutter/material.dart';
 import 'theme/theme_app.dart';
