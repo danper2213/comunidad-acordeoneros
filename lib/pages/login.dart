@@ -67,6 +67,15 @@ class LoginPage extends StatelessWidget {
           ],
         ),
       ),
+      Positioned(
+        left: 0,
+        right: 0,
+        bottom: 10.0,
+        child: Center(
+          child: Text('By Comunidad Acordeoneros',
+              style: AppTheme.lightTheme.textTheme.bodySmall),
+        ),
+      )
     ]);
   }
 }

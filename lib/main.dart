@@ -1,5 +1,4 @@
-
-import 'package:comunidad_acordeoneros/pages/login.dart';
+import 'package:comunidad_acordeoneros/pages/home.dart';
 import 'package:flutter/material.dart';
 import 'theme/theme_app.dart';
 
@@ -17,7 +16,7 @@ class MyApp extends StatelessWidget {
       title: 'Comunidad Acordeoneros',
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
-      home: const LoginPage(),
+      home: const HomePage(),
     );
   }
 }
