@@ -1,6 +1,6 @@
+import 'package:comunidad_acordeoneros/theme/theme_app.dart';
 import 'package:comunidad_acordeoneros/widgets/program_card.dart';
 import 'package:flutter/material.dart';
-
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -17,17 +17,19 @@ class HomePage extends StatelessWidget {
           icon: const Icon(Icons.menu),
         ),
       ),
-      body: const SizedBox(
+      body: SizedBox(
         width: double.infinity,
         child: Padding(
-          padding: EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Hola Ferney Arrieta'),
-              SizedBox(height: 16),
-              ProgramCard(
-                name: 'Programa 1',
+              const Text('Hola,'),
+              Text('Ferney Arrieta',
+                  style: AppTheme.lightTheme.textTheme.headlineMedium),
+              const SizedBox(height: 16),
+              const ProgramCard(
+                name: 'Programa VIP',
                 level: 'Nivel 1',
                 image: 'assets/images/fer-festival.jpg',
               ),
