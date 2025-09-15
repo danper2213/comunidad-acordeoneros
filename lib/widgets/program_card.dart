@@ -84,13 +84,18 @@ class ProgramCard extends StatelessWidget {
                     ),
                     Container(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 10, vertical: 5),
+                        horizontal: 10,
+                        vertical: 5,
+                      ),
                       decoration: BoxDecoration(
-                        color: Colors.grey.withOpacity(0.4),
+                        color: Colors.green.withOpacity(0.4),
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      child: Text('Habilitado',
-                          style: AppTheme.lightTheme.textTheme.bodySmall),
+                      child: Text(
+                        'Habilitado',
+                        style: AppTheme.lightTheme.textTheme.bodySmall
+                            ?.copyWith(color: Colors.white),
+                      ),
                     ),
                   ],
                 ),

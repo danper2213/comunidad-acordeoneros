@@ -1,3 +1,4 @@
+import 'package:comunidad_acordeoneros/pages/player_video.dart';
 import 'package:comunidad_acordeoneros/theme/theme_app.dart';
 import 'package:comunidad_acordeoneros/widgets/button_custom.dart';
 import 'package:flutter/material.dart';
@@ -179,11 +180,19 @@ class DetailProgramPage extends StatelessWidget {
                 child: ButtonCustom(
                   text: 'Continuar',
                   onPressed: () {
-                    // TODO: Add navigation to next step or action
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('¡Continuando con el programa!'),
-                        backgroundColor: AppTheme.primaryBlue,
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => PlayerVideoPage(
+                          videoPath: 'assets/videos/test.mp4',
+                          title: 'Introducción al Acordeón - $name',
+                          instructor: 'Ferney Arrieta',
+                          description:
+                              'En esta clase introductoria, aprenderás los conceptos básicos del acordeón y las técnicas fundamentales para comenzar tu viaje musical. Exploraremos la historia del instrumento, su estructura, y los primeros pasos para dominar este hermoso instrumento.',
+                          programName: name,
+                          views: 1250,
+                          chapterNumber: '1',
+                        ),
                       ),
                     );
                   },
