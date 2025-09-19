@@ -60,11 +60,14 @@ class ProgramCard extends StatelessWidget {
                     color: Colors.grey.withOpacity(0.5),
                     shape: BoxShape.circle,
                   ),
-                  child: Image.asset(
-                    'assets/images/corona.png',
-                    width: 60,
-                    height: 30,
-                    fit: BoxFit.cover,
+                  child: Padding(
+                    padding: const EdgeInsets.all(5),
+                    child: Image.asset(
+                      'assets/images/corona.png',
+                      width: 60,
+                      height: 30,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
               ),

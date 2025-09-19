@@ -1,4 +1,5 @@
 import 'package:comunidad_acordeoneros/theme/theme_app.dart';
+import 'package:comunidad_acordeoneros/widgets/card_todo.dart';
 import 'package:comunidad_acordeoneros/widgets/program_card.dart';
 import 'package:flutter/material.dart';
 
@@ -33,6 +34,8 @@ class HomePage extends StatelessWidget {
                 level: 'Nivel 1',
                 image: 'assets/images/fer-festival.jpg',
               ),
+              const SizedBox(height: 16),
+              const CardTodo(), 
             ],
           ),
         ),
