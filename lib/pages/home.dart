@@ -1,6 +1,7 @@
 import 'package:comunidad_acordeoneros/theme/theme_app.dart';
 import 'package:comunidad_acordeoneros/widgets/card_todo.dart';
 import 'package:comunidad_acordeoneros/widgets/program_card.dart';
+import 'package:comunidad_acordeoneros/widgets/separator.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -26,8 +27,10 @@ class HomePage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Text('Hola,'),
-              Text('Ferney Arrieta',
-                  style: AppTheme.lightTheme.textTheme.headlineMedium),
+              Text(
+                'Ferney Arrieta',
+                style: AppTheme.lightTheme.textTheme.headlineMedium,
+              ),
               const SizedBox(height: 16),
               const ProgramCard(
                 name: 'Programa VIP',
@@ -35,7 +38,8 @@ class HomePage extends StatelessWidget {
                 image: 'assets/images/fer-festival.jpg',
               ),
               const SizedBox(height: 16),
-              const CardTodo(), 
+              const SeparatorStart(),
+              const CardTodo(),
             ],
           ),
         ),

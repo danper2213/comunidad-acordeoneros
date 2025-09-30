@@ -7,17 +7,17 @@ class CardTodo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 200,
-      height: 200,
+      width: 150,
+      height: 150,
       decoration: BoxDecoration(
         color: Colors.transparent,
-        border: Border.all(color: AppTheme.accentBlue),
+        border: Border.all(color: AppTheme.white),
         borderRadius: BorderRadius.circular(20),
       ),
       child: Stack(
         children: [
           Positioned(
-            top: 20,
+            top: 15,
             right: 0,
             child: Container(
               padding: EdgeInsets.zero,
@@ -38,23 +38,23 @@ class CardTodo extends StatelessWidget {
             ),
           ),
           const Positioned(
-            bottom: 50,
+            bottom: 20,
             right: 10,
             child: Icon(
               Icons.arrow_right_alt_rounded,
               color: AppTheme.white,
-              size: 50,
+              size: 40,
             ),
           ),
           Positioned(
               left: 20,
-              bottom: 30,
+              bottom: 20,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Icon(Icons.calendar_month_rounded,
-                      color: AppTheme.white, size: 50),
-                  const SizedBox(height: 30),
+                      color: AppTheme.white, size: 40),
+                  const SizedBox(height: 10),
                   Text('Agendar',
                       style: AppTheme.lightTheme.textTheme.titleMedium),
                   Text('Clase',

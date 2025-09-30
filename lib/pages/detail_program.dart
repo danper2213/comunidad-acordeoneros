@@ -1,6 +1,5 @@
-import 'package:comunidad_acordeoneros/pages/player_video.dart';
 import 'package:comunidad_acordeoneros/theme/theme_app.dart';
-import 'package:comunidad_acordeoneros/widgets/button_custom.dart';
+import 'package:comunidad_acordeoneros/widgets/separator.dart';
 import 'package:flutter/material.dart';
 
 class DetailProgramPage extends StatelessWidget {
@@ -19,188 +18,138 @@ class DetailProgramPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Image.asset('assets/images/logo.png', width: 100, height: 100),
-        leading: IconButton(
-          onPressed: () => Navigator.pop(context),
-          icon: const Icon(Icons.arrow_back),
-        ),
-      ),
-      body: Container(
-        decoration: AppTheme.getBackgroundDecoration(),
-        child: SafeArea(
-          child: Column(
-            children: [
-              // Image with program name overlay
-              Expanded(
-                flex: 2,
-                child: Container(
-                  width: double.infinity,
-                  margin: const EdgeInsets.all(16.0),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  clipBehavior: Clip.antiAlias,
-                  child: Stack(
-                    children: [
-                      // Background image with opacity
-                      Hero(
-                        tag: 'program_image_$name',
-                        child: Opacity(
-                          opacity: 0.7,
-                          child: Image.asset(
-                            image,
-                            width: double.infinity,
-                            height: double.infinity,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ),
-                      // Program name overlay at bottom center
-                      Positioned(
-                        bottom: 0,
-                        left: 0,
-                        right: 0,
-                        child: Container(
-                          padding: const EdgeInsets.all(20.0),
-                          decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              begin: Alignment.topCenter,
-                              end: Alignment.bottomCenter,
-                              colors: [
-                                Colors.transparent,
-                                Colors.black.withOpacity(0.8),
-                              ],
-                            ),
-                          ),
-                          child: Column(
-                            children: [
-                              Hero(
-                                tag: 'program_name_$name',
-                                child: Material(
-                                  color: Colors.transparent,
-                                  child: Text(
-                                    name,
-                                    style: AppTheme
-                                        .lightTheme.textTheme.displayMedium
-                                        ?.copyWith(
-                                      color: AppTheme.white,
-                                      fontWeight: FontWeight.bold,
-                                      shadows: [
-                                        const Shadow(
-                                          offset: Offset(0, 2),
-                                          blurRadius: 4,
-                                          color: Colors.black54,
-                                        ),
-                                      ],
-                                    ),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(height: 8),
-                              Container(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 12,
-                                  vertical: 6,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: AppTheme.primaryBlue.withOpacity(0.8),
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                                child: Text(
-                                  level,
-                                  style: AppTheme
-                                      .lightTheme.textTheme.bodyMedium
-                                      ?.copyWith(
-                                    color: AppTheme.white,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
+    return SizedBox(
+      child: Column(
+        children: [
+          Container(
+            width: double.infinity,
+            height: height * 0.4,
+            decoration: const BoxDecoration(
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(24),
+                bottomRight: Radius.circular(24),
               ),
-
-              // Description section
-              Expanded(
-                flex: 1,
-                child: Container(
-                  width: double.infinity,
-                  margin: const EdgeInsets.symmetric(horizontal: 16.0),
-                  padding: const EdgeInsets.all(20.0),
-                  decoration: BoxDecoration(
-                    color: AppTheme.white.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(16),
-                    border: Border.all(
-                      color: AppTheme.white.withOpacity(0.2),
-                      width: 1,
+            ),
+            clipBehavior: Clip.antiAlias,
+            child: Stack(
+              children: [
+                Hero(
+                  tag: 'program_image_$name',
+                  child: Container(
+                    width: double.infinity,
+                    height: double.infinity,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage(image),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: [
+                            Colors.transparent,
+                            Colors.black.withOpacity(0.7),
+                          ],
+                        ),
+                      ),
                     ),
                   ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Descripción',
-                        style: AppTheme.lightTheme.textTheme.headlineSmall
-                            ?.copyWith(
-                          color: AppTheme.white,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      const SizedBox(height: 12),
-                      Expanded(
-                        child: SingleChildScrollView(
-                          child: Text(
-                            description,
-                            style: AppTheme.lightTheme.textTheme.bodyLarge
-                                ?.copyWith(
-                              color: AppTheme.white.withOpacity(0.9),
-                              height: 1.5,
-                            ),
+                ),
+                // Back button
+                Positioned(
+                  top: 50,
+                  left: 20,
+                  child: Hero(
+                    tag: 'back_button',
+                    child: Material(
+                      color: Colors.transparent,
+                      child: IconButton(
+                        onPressed: () => Navigator.pop(context),
+                        icon: Container(
+                          padding: const EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                            color: Colors.black.withOpacity(0.3),
+                            shape: BoxShape.circle,
+                          ),
+                          child: const Icon(
+                            Icons.arrow_back,
+                            color: AppTheme.white,
+                            size: 24,
                           ),
                         ),
                       ),
-                    ],
+                    ),
                   ),
                 ),
-              ),
+                // Decorative shapes overlay
 
-              // Continue button
-              Container(
-                width: double.infinity,
-                padding: const EdgeInsets.all(16.0),
-                child: ButtonCustom(
-                  text: 'Continuar',
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => PlayerVideoPage(
-                          videoPath: 'assets/videos/test.mp4',
-                          title: 'Introducción al Acordeón - $name',
-                          instructor: 'Ferney Arrieta',
-                          description:
-                              'En esta clase introductoria, aprenderás los conceptos básicos del acordeón y las técnicas fundamentales para comenzar tu viaje musical. Exploraremos la historia del instrumento, su estructura, y los primeros pasos para dominar este hermoso instrumento.',
-                          programName: name,
-                          views: 1250,
-                          chapterNumber: '1',
+                // Instructor illustration with hero animation
+                Positioned(
+                  bottom: 30,
+                  left: 0,
+                  right: 0,
+                  child: Center(
+                    child: Hero(
+                      tag: 'instructor_$name',
+                      child: SizedBox(
+                        width: 250,
+                        child: Text(
+                          'PROGRAMA VIP',
+                          style: AppTheme.lightTheme.textTheme.displayMedium
+                              ?.copyWith(
+                            color: AppTheme.white,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
-                    );
-                  },
+                    ),
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
+          Expanded(
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.grey.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(16),
+              ),
+              width: double.infinity,
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 16),
+                  Text(
+                    'Descripción del programa',
+                    style:
+                        AppTheme.lightTheme.textTheme.headlineSmall?.copyWith(
+                      color: AppTheme.white,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+
+                  // Separator
+                  const SeparatorStart(),
+
+                  Text(
+                    description,
+                    style: AppTheme.lightTheme.textTheme.bodyLarge?.copyWith(
+                      color: AppTheme.white.withOpacity(0.9),
+                      height: 1.6,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          // Description Section
+        ],
       ),
     );
   }
