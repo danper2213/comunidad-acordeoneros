@@ -30,8 +30,8 @@ class CardTodo extends StatelessWidget {
                 padding: const EdgeInsets.all(5),
                 child: Image.asset(
                   'assets/images/corona.png',
-                  width: 60,
-                  height: 30,
+                  width: 50,
+                  height: 20,
                   fit: BoxFit.cover,
                 ),
               ),
@@ -53,8 +53,8 @@ class CardTodo extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Icon(Icons.calendar_month_rounded,
-                      color: AppTheme.white, size: 40),
-                  const SizedBox(height: 10),
+                      color: AppTheme.white, size: 30),
+                  const SizedBox(height: 20),
                   Text('Agendar',
                       style: AppTheme.lightTheme.textTheme.titleMedium),
                   Text('Clase',

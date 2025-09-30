@@ -14,7 +14,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Comunidad Acordeoneros',
-      
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       home: const HomePage(),

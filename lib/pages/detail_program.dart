@@ -18,138 +18,168 @@ class DetailProgramPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
-    return SizedBox(
-      child: Column(
-        children: [
-          Container(
-            width: double.infinity,
-            height: height * 0.4,
-            decoration: const BoxDecoration(
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(24),
-                bottomRight: Radius.circular(24),
-              ),
-            ),
-            clipBehavior: Clip.antiAlias,
-            child: Stack(
-              children: [
-                Hero(
-                  tag: 'program_image_$name',
-                  child: Container(
-                    width: double.infinity,
-                    height: double.infinity,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage(image),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          colors: [
-                            Colors.transparent,
-                            Colors.black.withOpacity(0.7),
-                          ],
+    return Scaffold(
+      body: Container(
+        decoration: AppTheme.getBackgroundDecoration(),
+        child: SafeArea(
+          child: Column(
+            children: [
+              // Image with program name overlay
+              Expanded(
+                flex: 1,
+                child: Container(
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  clipBehavior: Clip.antiAlias,
+                  child: Stack(
+                    children: [
+                      // Background image with opacity
+                      Hero(
+                        tag: 'program_image_$name',
+                        child: Opacity(
+                          opacity: 0.7,
+                          child: Image.asset(
+                            image,
+                            width: double.infinity,
+                            height: double.infinity,
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
-                    ),
-                  ),
-                ),
-                // Back button
-                Positioned(
-                  top: 50,
-                  left: 20,
-                  child: Hero(
-                    tag: 'back_button',
-                    child: Material(
-                      color: Colors.transparent,
-                      child: IconButton(
-                        onPressed: () => Navigator.pop(context),
-                        icon: Container(
-                          padding: const EdgeInsets.all(8),
+                      Positioned(
+                        top: 0,
+                        left: 0,
+                        child: Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: GestureDetector(
+                            onTap: () => Navigator.pop(context),
+                            child: Container(
+                              width: 50,
+                              height: 40,
+                              decoration: BoxDecoration(
+                                color: Colors.grey.withOpacity(0.3),
+                                shape: BoxShape.circle,
+                              ),
+                              child: const Icon(
+                                Icons.arrow_back,
+                                size: 24,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      // Program name overlay at bottom center
+                      Positioned(
+                        bottom: 0,
+                        left: 0,
+                        right: 0,
+                        child: Container(
+                          padding: const EdgeInsets.all(20.0),
                           decoration: BoxDecoration(
-                            color: Colors.black.withOpacity(0.3),
-                            shape: BoxShape.circle,
+                            gradient: LinearGradient(
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter,
+                              colors: [
+                                Colors.transparent,
+                                Colors.black.withOpacity(0.8),
+                              ],
+                            ),
                           ),
-                          child: const Icon(
-                            Icons.arrow_back,
-                            color: AppTheme.white,
-                            size: 24,
+                          child: Column(
+                            children: [
+                              Hero(
+                                tag: 'program_name_$name',
+                                child: Material(
+                                  color: Colors.transparent,
+                                  child: Text(
+                                    name,
+                                    style: AppTheme
+                                        .lightTheme.textTheme.displayMedium
+                                        ?.copyWith(
+                                      color: AppTheme.white,
+                                      fontWeight: FontWeight.bold,
+                                      shadows: [
+                                        const Shadow(
+                                          offset: Offset(0, 2),
+                                          blurRadius: 4,
+                                          color: Colors.black54,
+                                        ),
+                                      ],
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(height: 8),
+                              Container(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 12,
+                                  vertical: 6,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: AppTheme.primaryBlue.withOpacity(0.8),
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                child: Text(
+                                  level,
+                                  style: AppTheme
+                                      .lightTheme.textTheme.bodyMedium
+                                      ?.copyWith(
+                                    color: AppTheme.white,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ),
-                    ),
+                    ],
                   ),
                 ),
-                // Decorative shapes overlay
-
-                // Instructor illustration with hero animation
-                Positioned(
-                  bottom: 30,
-                  left: 0,
-                  right: 0,
-                  child: Center(
-                    child: Hero(
-                      tag: 'instructor_$name',
-                      child: SizedBox(
-                        width: 250,
-                        child: Text(
-                          'PROGRAMA VIP',
-                          style: AppTheme.lightTheme.textTheme.displayMedium
-                              ?.copyWith(
-                            color: AppTheme.white,
-                            fontWeight: FontWeight.bold,
-                          ),
+              ),
+              Expanded(
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.grey.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  width: double.infinity,
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(height: 16),
+                      Text(
+                        'Descripción del programa',
+                        style: AppTheme.lightTheme.textTheme.headlineSmall
+                            ?.copyWith(
+                          color: AppTheme.white,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
-                    ),
+
+                      // Separator
+                      const SeparatorStart(),
+
+                      Text(
+                        description,
+                        style:
+                            AppTheme.lightTheme.textTheme.bodyLarge?.copyWith(
+                          color: AppTheme.white.withOpacity(0.9),
+                          height: 1.6,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-              ],
-            ),
-          ),
-          Expanded(
-            child: Container(
-              decoration: BoxDecoration(
-                color: Colors.grey.withOpacity(0.1),
-                borderRadius: BorderRadius.circular(16),
               ),
-              width: double.infinity,
-              padding: const EdgeInsets.all(16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(height: 16),
-                  Text(
-                    'Descripción del programa',
-                    style:
-                        AppTheme.lightTheme.textTheme.headlineSmall?.copyWith(
-                      color: AppTheme.white,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-
-                  // Separator
-                  const SeparatorStart(),
-
-                  Text(
-                    description,
-                    style: AppTheme.lightTheme.textTheme.bodyLarge?.copyWith(
-                      color: AppTheme.white.withOpacity(0.9),
-                      height: 1.6,
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            ],
           ),
-          // Description Section
-        ],
+        ),
       ),
     );
   }
