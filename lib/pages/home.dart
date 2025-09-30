@@ -1,11 +1,11 @@
-import 'package:comunidad_acordeoneros/pages/player_video.dart';
+
 import 'package:comunidad_acordeoneros/theme/theme_app.dart';
 import 'package:comunidad_acordeoneros/widgets/card_todo.dart';
 import 'package:comunidad_acordeoneros/widgets/program_card.dart';
 import 'package:comunidad_acordeoneros/widgets/separator.dart';
 import 'package:comunidad_acordeoneros/pages/detail_program.dart';
 // import 'package:comunidad_acordeoneros/pages/player_video.dart';
-import 'package:comunidad_acordeoneros/pages/login.dart';
+
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 
@@ -28,17 +28,21 @@ class _HomePageState extends State<HomePage> {
       description:
           'Este es un programa especializado para aprender acordeón desde cero. Incluye lecciones paso a paso, ejercicios prácticos y seguimiento personalizado con nuestro instructor experto Ferney Arrieta.',
     ),
-    const PlayerVideoPage(
-      videoPath: 'assets/videos/test.mp4',
-      title: 'Introducción al Acordeón',
-      instructor: 'Ferney Arrieta',
+     const DetailProgramPage(
+      name: 'Programa VIP',
+      level: 'Nivel 1',
+      image: 'assets/images/fer-festival.jpg',
       description:
-          'En esta clase introductoria, aprenderás los conceptos básicos del acordeón y las técnicas fundamentales para comenzar tu viaje musical.',
-      programName: 'Programa VIP',
-      views: 1250,
-      chapterNumber: '1',
+          'Este es un programa especializado para aprender acordeón desde cero. Incluye lecciones paso a paso, ejercicios prácticos y seguimiento personalizado con nuestro instructor experto Ferney Arrieta.',
     ),
-    const LoginPage(),
+     const DetailProgramPage(
+      name: 'Programa VIP',
+      level: 'Nivel 1',
+      image: 'assets/images/fer-festival.jpg',
+      description:
+          'Este es un programa especializado para aprender acordeón desde cero. Incluye lecciones paso a paso, ejercicios prácticos y seguimiento personalizado con nuestro instructor experto Ferney Arrieta.',
+    ),
+   
   ];
 
   @override

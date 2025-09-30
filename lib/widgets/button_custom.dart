@@ -15,7 +15,8 @@ class ButtonCustom extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return SizedBox(
-        width: size.width, // Full width minus padding
+        width: size.width,
+        height: 55, // Full width minus padding
         child: Container(
           decoration: BoxDecoration(
             gradient: AppTheme.backgroundGradientButton,

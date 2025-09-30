@@ -1,3 +1,5 @@
+import 'package:comunidad_acordeoneros/pages/login_form.dart';
+import 'package:comunidad_acordeoneros/pages/register_form.dart';
 import 'package:comunidad_acordeoneros/theme/theme_app.dart';
 import 'package:comunidad_acordeoneros/widgets/button_custom.dart';
 import 'package:flutter/material.dart';
@@ -42,10 +44,17 @@ class LoginPage extends StatelessWidget {
         bottom: 100,
         left: 20.0,
         right: 20.0,
-        child: ButtonCustom(text: 'Ingresar', onPressed: () {}),
+        child: ButtonCustom(
+            text: 'Ingresar',
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const LoginFormPage()));
+            }),
       ),
       Positioned(
-        bottom: 80,
+        bottom: 55,
         left: 20.0,
         right: 20.0,
         child: Row(
@@ -58,10 +67,19 @@ class LoginPage extends StatelessWidget {
             const SizedBox(
               width: 10,
             ),
-            Text(
-              'Registrate',
-              style: AppTheme.lightTheme.textTheme.bodySmall?.copyWith(
-                fontWeight: FontWeight.bold,
+            TextButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const RegisterFormPage()),
+                );
+              },
+              child: Text(
+                'Registrate',
+                style: AppTheme.lightTheme.textTheme.bodySmall?.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
           ],

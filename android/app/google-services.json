@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "313828643331",
+    "project_id": "app-acordeoneros",
+    "storage_bucket": "app-acordeoneros.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:313828643331:android:77bdadd85a97bda6603436",
+        "android_client_info": {
+          "package_name": "com.example.comunidad_acordeoneros"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCpvExf4Bw6Eug17ds20tgVY7vYGgQTmtg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
