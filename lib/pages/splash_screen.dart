@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:comunidad_acordeoneros/theme/theme_app.dart';
-import 'package:comunidad_acordeoneros/pages/login.dart';
+import 'package:comunidad_acordeoneros/features/auth/presentation/widgets/auth_wrapper.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -78,13 +78,13 @@ class _SplashScreenState extends State<SplashScreen>
     await Future.delayed(const Duration(milliseconds: 500));
     _logoController.forward();
 
-    // Navigate to login page after animations complete
+    // Navigate to AuthWrapper after animations complete
     await Future.delayed(const Duration(seconds: 3));
     if (mounted) {
       Navigator.of(context).pushReplacement(
         PageRouteBuilder(
           pageBuilder: (context, animation, secondaryAnimation) =>
-              const LoginPage(),
+              const AuthWrapper(),
           transitionDuration: const Duration(milliseconds: 500),
           transitionsBuilder: (context, animation, secondaryAnimation, child) {
             return FadeTransition(

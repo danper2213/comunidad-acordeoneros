@@ -26,11 +26,6 @@ class _AuthWrapperState extends State<AuthWrapper> {
   Widget build(BuildContext context) {
     return Consumer<AuthProvider>(
       builder: (context, authProvider, child) {
-        // Debug: Imprimir estado actual
-        print('AuthWrapper - Status: ${authProvider.status}');
-        print('AuthWrapper - IsAuthenticated: ${authProvider.isAuthenticated}');
-        print('AuthWrapper - User: ${authProvider.user?.email}');
-
         // Mostrar loading mientras se verifica el estado
         if (authProvider.status == AuthStatus.initial ||
             authProvider.status == AuthStatus.loading) {
@@ -43,12 +38,10 @@ class _AuthWrapperState extends State<AuthWrapper> {
 
         // Si está autenticado, mostrar Home
         if (authProvider.isAuthenticated && authProvider.user != null) {
-          print('AuthWrapper - Navegando a HomePage');
           return const HomePage();
         }
 
         // Si no está autenticado, mostrar Login
-        print('AuthWrapper - Navegando a LoginPage');
         return const LoginPage();
       },
     );

@@ -408,7 +408,6 @@ class _LoginFormPageState extends State<LoginFormPage> {
 
   void _handleLogin() async {
     if (_formKey.currentState!.validate()) {
-      print('LoginForm - Iniciando login...');
       final authProvider = Provider.of<AuthProvider>(context, listen: false);
 
       final success = await authProvider.signInWithEmailAndPassword(
@@ -416,13 +415,8 @@ class _LoginFormPageState extends State<LoginFormPage> {
         password: _passwordController.text,
       );
 
-      print('LoginForm - Resultado del login: $success');
-      print('LoginForm - Estado del provider: ${authProvider.status}');
-      print('LoginForm - Usuario: ${authProvider.user?.email}');
-
       if (success) {
         // La navegación se maneja automáticamente por AuthWrapper
-        print('LoginForm - Login exitoso, mostrando SnackBar');
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
@@ -442,7 +436,6 @@ class _LoginFormPageState extends State<LoginFormPage> {
           });
         }
       } else {
-        print('LoginForm - Error en login: ${authProvider.errorMessage}');
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(

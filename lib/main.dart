@@ -7,7 +7,7 @@ import 'package:comunidad_acordeoneros/core/di/injection_container.dart';
 import 'package:comunidad_acordeoneros/core/di/programs_injection.dart';
 import 'package:comunidad_acordeoneros/features/auth/presentation/providers/auth_provider.dart';
 import 'package:comunidad_acordeoneros/features/programs/presentation/providers/programs_provider.dart';
-import 'package:comunidad_acordeoneros/features/auth/presentation/widgets/auth_wrapper.dart';
+import 'package:comunidad_acordeoneros/pages/splash_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
         title: 'Comunidad Acordeoneros',
         theme: AppTheme.lightTheme,
         darkTheme: AppTheme.darkTheme,
-        home: const AuthWrapper(),
+        home: const SplashScreen(),
       ),
     );
   }
