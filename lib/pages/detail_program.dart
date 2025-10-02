@@ -1,19 +1,14 @@
 import 'package:comunidad_acordeoneros/theme/theme_app.dart';
 import 'package:comunidad_acordeoneros/widgets/separator.dart';
+import 'package:comunidad_acordeoneros/pages/level_lessons_page.dart';
 import 'package:flutter/material.dart';
 
 class DetailProgramPage extends StatelessWidget {
-  final String name;
-  final String level;
-  final String image;
-  final String description;
+  final dynamic program;
 
   const DetailProgramPage({
     super.key,
-    required this.name,
-    required this.level,
-    required this.image,
-    required this.description,
+    required this.program,
   });
 
   @override
@@ -37,11 +32,11 @@ class DetailProgramPage extends StatelessWidget {
                     children: [
                       // Background image with opacity
                       Hero(
-                        tag: 'program_image_$name',
+                        tag: 'program_image_${program.name}',
                         child: Opacity(
                           opacity: 0.7,
                           child: Image.asset(
-                            image,
+                            program.imageUrl,
                             width: double.infinity,
                             height: double.infinity,
                             fit: BoxFit.cover,
@@ -91,11 +86,11 @@ class DetailProgramPage extends StatelessWidget {
                           child: Column(
                             children: [
                               Hero(
-                                tag: 'program_name_$name',
+                                tag: 'program_name_${program.name}',
                                 child: Material(
                                   color: Colors.transparent,
                                   child: Text(
-                                    name,
+                                    program.name,
                                     style: AppTheme
                                         .lightTheme.textTheme.displayMedium
                                         ?.copyWith(
@@ -114,23 +109,12 @@ class DetailProgramPage extends StatelessWidget {
                                 ),
                               ),
                               const SizedBox(height: 8),
-                              Container(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 12,
-                                  vertical: 6,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: AppTheme.primaryBlue.withOpacity(0.8),
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                                child: Text(
-                                  level,
-                                  style: AppTheme
-                                      .lightTheme.textTheme.bodyMedium
-                                      ?.copyWith(
-                                    color: AppTheme.white,
-                                    fontWeight: FontWeight.w500,
-                                  ),
+                              Text(
+                                'Progreso: ${(program.overallProgress * 100).toInt()}%',
+                                style: AppTheme.lightTheme.textTheme.bodyMedium
+                                    ?.copyWith(
+                                  color: AppTheme.white,
+                                  fontWeight: FontWeight.w500,
                                 ),
                               ),
                             ],
@@ -149,35 +133,165 @@ class DetailProgramPage extends StatelessWidget {
                   ),
                   width: double.infinity,
                   padding: const EdgeInsets.all(16),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const SizedBox(height: 16),
+                        Text(
+                          'Descripción del programa',
+                          style: AppTheme.lightTheme.textTheme.headlineSmall
+                              ?.copyWith(
+                            color: AppTheme.white,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+
+                        // Separator
+                        const SeparatorStart(),
+
+                        Text(
+                          program.description,
+                          style:
+                              AppTheme.lightTheme.textTheme.bodyLarge?.copyWith(
+                            color: AppTheme.white.withOpacity(0.9),
+                            height: 1.6,
+                          ),
+                        ),
+
+                        const SizedBox(height: 24),
+
+                        Text(
+                          'Niveles del programa',
+                          style: AppTheme.lightTheme.textTheme.headlineSmall
+                              ?.copyWith(
+                            color: AppTheme.white,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+
+                        const SizedBox(height: 16),
+
+                        // Lista de niveles
+                        ...program.levels.map((level) {
+                          return _buildLevelCard(context, level, program.levels.indexOf(level) + 1);
+                        }),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildLevelCard(BuildContext context, dynamic level, int number) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 12),
+      decoration: BoxDecoration(
+        color: level.isUnlocked
+            ? AppTheme.white.withOpacity(0.1)
+            : AppTheme.white.withOpacity(0.05),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(
+          color: level.isUnlocked
+              ? AppTheme.primaryBlue.withOpacity(0.5)
+              : AppTheme.white.withOpacity(0.2),
+        ),
+      ),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: level.isUnlocked
+              ? () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => LevelLessonsPage(
+                        level: level,
+                        programName: program.name,
+                      ),
+                    ),
+                  );
+                }
+              : null,
+          borderRadius: BorderRadius.circular(12),
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Row(
+              children: [
+                Container(
+                  width: 50,
+                  height: 50,
+                  decoration: BoxDecoration(
+                    color: level.isUnlocked
+                        ? AppTheme.primaryBlue.withOpacity(0.3)
+                        : Colors.grey.withOpacity(0.3),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Center(
+                    child: level.isUnlocked
+                        ? Text(
+                            '$number',
+                            style: AppTheme.lightTheme.textTheme.titleLarge
+                                ?.copyWith(
+                              color: AppTheme.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          )
+                        : const Icon(
+                            Icons.lock,
+                            color: Colors.grey,
+                            size: 24,
+                          ),
+                  ),
+                ),
+                const SizedBox(width: 16),
+                Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const SizedBox(height: 16),
                       Text(
-                        'Descripción del programa',
-                        style: AppTheme.lightTheme.textTheme.headlineSmall
-                            ?.copyWith(
+                        level.name,
+                        style:
+                            AppTheme.lightTheme.textTheme.titleMedium?.copyWith(
                           color: AppTheme.white,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
-
-                      // Separator
-                      const SeparatorStart(),
-
+                      const SizedBox(height: 4),
                       Text(
-                        description,
+                        '${level.completedLessons} de ${level.totalLessons} clases completadas',
                         style:
-                            AppTheme.lightTheme.textTheme.bodyLarge?.copyWith(
-                          color: AppTheme.white.withOpacity(0.9),
-                          height: 1.6,
+                            AppTheme.lightTheme.textTheme.bodySmall?.copyWith(
+                          color: AppTheme.white.withOpacity(0.7),
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(8),
+                        child: LinearProgressIndicator(
+                          value: level.progress,
+                          backgroundColor: AppTheme.white.withOpacity(0.2),
+                          valueColor: const AlwaysStoppedAnimation<Color>(
+                            AppTheme.primaryBlue,
+                          ),
+                          minHeight: 6,
                         ),
                       ),
                     ],
                   ),
                 ),
-              ),
-            ],
+                Icon(
+                  level.isUnlocked ? Icons.arrow_forward_ios : Icons.lock,
+                  color: level.isUnlocked ? AppTheme.primaryBlue : Colors.grey,
+                  size: 20,
+                ),
+              ],
+            ),
           ),
         ),
       ),

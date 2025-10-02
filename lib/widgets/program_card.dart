@@ -16,15 +16,12 @@ class ProgramCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
+        // Crear un programa mock para la navegación
+        final mockProgram = _createMockProgram();
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => DetailProgramPage(
-              name: name,
-              level: level,
-              image: image,
-              description: _getProgramDescription(name),
-            ),
+            builder: (context) => DetailProgramPage(program: mockProgram),
           ),
         );
       },
@@ -115,5 +112,32 @@ class ProgramCard extends StatelessWidget {
       default:
         return 'Descubre un programa único diseñado especialmente para acordeoneros apasionados. Aprende técnicas avanzadas, mejora tu interpretación y conecta con una comunidad de músicos dedicados al acordeón.';
     }
+  }
+
+  Map<String, dynamic> _createMockProgram() {
+    return {
+      'name': name,
+      'description': _getProgramDescription(name),
+      'imageUrl': image,
+      'overallProgress': 0.0,
+      'levels': [
+        {
+          'name': 'Nivel 1 - Fundamentos',
+          'description': 'Aprende los fundamentos básicos del acordeón vallenato.',
+          'isUnlocked': true,
+          'progress': 0.0,
+          'completedLessons': 0,
+          'totalLessons': 3,
+        },
+        {
+          'name': 'Nivel 2 - Técnicas Intermedias',
+          'description': 'Desarrolla tus habilidades con técnicas intermedias.',
+          'isUnlocked': false,
+          'progress': 0.0,
+          'completedLessons': 0,
+          'totalLessons': 4,
+        },
+      ],
+    };
   }
 }

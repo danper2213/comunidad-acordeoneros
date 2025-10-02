@@ -4,6 +4,7 @@ import 'package:comunidad_acordeoneros/widgets/program_card.dart';
 import 'package:comunidad_acordeoneros/widgets/separator.dart';
 import 'package:comunidad_acordeoneros/pages/level_lessons_page.dart';
 import 'package:comunidad_acordeoneros/pages/login.dart';
+import 'package:comunidad_acordeoneros/pages/detail_program.dart';
 import 'package:comunidad_acordeoneros/features/programs/presentation/providers/programs_provider.dart';
 import 'package:comunidad_acordeoneros/features/auth/presentation/providers/auth_provider.dart';
 
@@ -81,6 +82,7 @@ class _HomeContent extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+          backgroundColor: AppTheme.darkBlue,
           centerTitle: true,
           title: Image.asset('assets/images/logo.png', width: 100, height: 100),
           leading: IconButton(
@@ -228,7 +230,7 @@ class _ProgramCardDynamic extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => _ProgramDetailPage(program: program),
+            builder: (context) => DetailProgramPage(program: program),
           ),
         );
       },
