@@ -1,7 +1,10 @@
 import 'package:comunidad_acordeoneros/pages/register_form.dart';
+import 'package:comunidad_acordeoneros/pages/home.dart';
 import 'package:comunidad_acordeoneros/widgets/button_custom.dart';
 import 'package:flutter/material.dart';
 import 'package:comunidad_acordeoneros/theme/theme_app.dart';
+import 'package:provider/provider.dart';
+import 'package:comunidad_acordeoneros/features/auth/presentation/providers/auth_provider.dart';
 
 class LoginFormPage extends StatefulWidget {
   const LoginFormPage({super.key});
@@ -28,6 +31,7 @@ class _LoginFormPageState extends State<LoginFormPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
+        height: double.infinity,
         decoration: AppTheme.getBackgroundDecoration(),
         child: SafeArea(
           child: SingleChildScrollView(
@@ -402,25 +406,90 @@ class _LoginFormPageState extends State<LoginFormPage> {
     );
   }
 
-  void _handleLogin() {
+  void _handleLogin() async {
     if (_formKey.currentState!.validate()) {
-      // TODO: Implement login logic
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Login attempted with ${_emailController.text}'),
-          backgroundColor: AppTheme.primaryBlue,
-        ),
+      print('LoginForm - Iniciando login...');
+      final authProvider = Provider.of<AuthProvider>(context, listen: false);
+
+      final success = await authProvider.signInWithEmailAndPassword(
+        email: _emailController.text.trim(),
+        password: _passwordController.text,
       );
+
+      print('LoginForm - Resultado del login: $success');
+      print('LoginForm - Estado del provider: ${authProvider.status}');
+      print('LoginForm - Usuario: ${authProvider.user?.email}');
+
+      if (success) {
+        // La navegación se maneja automáticamente por AuthWrapper
+        print('LoginForm - Login exitoso, mostrando SnackBar');
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('¡Inicio de sesión exitoso! 🎉'),
+              backgroundColor: Colors.green,
+            ),
+          );
+
+          // Forzar navegación después del login exitoso
+          Future.delayed(const Duration(milliseconds: 500), () {
+            if (mounted) {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => const HomePage()),
+              );
+            }
+          });
+        }
+      } else {
+        print('LoginForm - Error en login: ${authProvider.errorMessage}');
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content:
+                  Text(authProvider.errorMessage ?? 'Error al iniciar sesión'),
+              backgroundColor: Colors.red,
+            ),
+          );
+        }
+      }
     }
   }
 
-  void _handleSocialLogin(String provider) {
-    // TODO: Implement social login logic
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text('$provider login attempted'),
-        backgroundColor: AppTheme.primaryBlue,
-      ),
-    );
+  void _handleSocialLogin(String provider) async {
+    final authProvider = Provider.of<AuthProvider>(context, listen: false);
+
+    if (provider == 'Google') {
+      final success = await authProvider.signInWithGoogle();
+
+      if (success) {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('¡Inicio de sesión con Google exitoso! 🎉'),
+              backgroundColor: Colors.green,
+            ),
+          );
+        }
+      } else {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(authProvider.errorMessage ??
+                  'Error al iniciar sesión con Google'),
+              backgroundColor: Colors.red,
+            ),
+          );
+        }
+      }
+    } else {
+      // Facebook y Apple aún no implementados
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('$provider login no disponible aún'),
+          backgroundColor: Colors.orange,
+        ),
+      );
+    }
   }
 }

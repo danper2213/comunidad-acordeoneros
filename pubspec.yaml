@@ -31,15 +31,26 @@ dependencies:
   flutter:
     sdk: flutter
 
-
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.6
-  google_fonts: ^6.1.0
-  video_player: 2.9.0
-  curved_navigation_bar: ^1.0.3
+  
+  # Firebase
   firebase_core: ^4.1.1
   firebase_auth: ^6.1.0
+  
+  # Autenticación Social
+  google_sign_in: ^6.2.1
+  
+  # Gestión de Estado
+  provider: ^6.1.2
+  
+  # UI
+  google_fonts: ^6.1.0
+  curved_navigation_bar: ^1.0.3
+  
+  # Multimedia
+  video_player: 2.9.0
 
 dev_dependencies:
   flutter_test:

@@ -1,6 +1,9 @@
+import 'package:comunidad_acordeoneros/pages/home.dart';
 import 'package:comunidad_acordeoneros/widgets/button_custom.dart';
 import 'package:flutter/material.dart';
 import 'package:comunidad_acordeoneros/theme/theme_app.dart';
+import 'package:provider/provider.dart';
+import 'package:comunidad_acordeoneros/features/auth/presentation/providers/auth_provider.dart';
 
 class RegisterFormPage extends StatefulWidget {
   const RegisterFormPage({super.key});
@@ -31,6 +34,7 @@ class _RegisterFormPageState extends State<RegisterFormPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
+        height: double.infinity,
         decoration: AppTheme.getBackgroundDecoration(),
         child: SafeArea(
           child: SingleChildScrollView(
@@ -405,25 +409,84 @@ class _RegisterFormPageState extends State<RegisterFormPage> {
     );
   }
 
-  void _handleRegister() {
+  void _handleRegister() async {
     if (_formKey.currentState!.validate()) {
-      // TODO: Implement register logic
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Register attempted with ${_emailController.text}'),
-          backgroundColor: AppTheme.primaryBlue,
-        ),
+      final authProvider = Provider.of<AuthProvider>(context, listen: false);
+
+      final success = await authProvider.signUpWithEmailAndPassword(
+        email: _emailController.text.trim(),
+        password: _passwordController.text,
+        displayName: _nameController.text.trim(),
       );
+
+      if (success) {
+        // La navegación se maneja automáticamente por AuthWrapper
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('¡Cuenta creada exitosamente! 🎉'),
+              backgroundColor: Colors.green,
+            ),
+          );
+
+          // Forzar navegación después del registro exitoso
+          Future.delayed(const Duration(milliseconds: 500), () {
+            if (mounted) {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => const HomePage()),
+              );
+            }
+          });
+        }
+      } else {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content:
+                  Text(authProvider.errorMessage ?? 'Error al crear la cuenta'),
+              backgroundColor: Colors.red,
+            ),
+          );
+        }
+      }
     }
   }
 
-  void _handleSocialLogin(String provider) {
-    // TODO: Implement social login logic
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text('$provider login attempted'),
-        backgroundColor: AppTheme.primaryBlue,
-      ),
-    );
+  void _handleSocialLogin(String provider) async {
+    final authProvider = Provider.of<AuthProvider>(context, listen: false);
+
+    if (provider == 'Google') {
+      final success = await authProvider.signInWithGoogle();
+
+      if (success) {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('¡Registro con Google exitoso! 🎉'),
+              backgroundColor: Colors.green,
+            ),
+          );
+        }
+      } else {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(authProvider.errorMessage ??
+                  'Error al registrarse con Google'),
+              backgroundColor: Colors.red,
+            ),
+          );
+        }
+      }
+    } else {
+      // Facebook y Apple aún no implementados
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('$provider registro no disponible aún'),
+          backgroundColor: Colors.orange,
+        ),
+      );
+    }
   }
 }
