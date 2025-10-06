@@ -61,6 +61,7 @@ dependencies:
   # Utilidades
   uuid: ^4.5.1
   intl: ^0.19.0
+  path: ^1.9.0
 
 dev_dependencies:
   flutter_test:

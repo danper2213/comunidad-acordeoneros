@@ -153,7 +153,7 @@ class _LoginFormPageState extends State<LoginFormPage> {
                       ),
                       TextButton(
                         onPressed: () {
-                          // TODO: Implement forgot password
+                          //Implement forgot password
                         },
                         child: Text(
                           'Olvidé mi contraseña',

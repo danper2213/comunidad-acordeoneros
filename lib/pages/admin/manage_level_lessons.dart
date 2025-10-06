@@ -200,7 +200,7 @@ class _ManageLevelLessonsPageState extends State<ManageLevelLessonsPage>
           children: [
             Row(
               children: [
-                Icon(Icons.layers, color: AppTheme.primaryBlue),
+                const Icon(Icons.layers, color: AppTheme.primaryBlue),
                 const SizedBox(width: 8),
                 Text(
                   'Información del Nivel',
@@ -445,11 +445,11 @@ class _ManageLevelLessonsPageState extends State<ManageLevelLessonsPage>
                   children: [
                     IconButton(
                       onPressed: () => _editLesson(index),
-                      icon: Icon(Icons.edit, color: AppTheme.primaryBlue),
+                      icon: const Icon(Icons.edit, color: AppTheme.primaryBlue),
                     ),
                     IconButton(
                       onPressed: () => _removeLesson(index),
-                      icon: Icon(Icons.delete, color: Colors.red),
+                      icon: const Icon(Icons.delete, color: Colors.red),
                     ),
                   ],
                 ),
@@ -481,7 +481,7 @@ class _ManageLevelLessonsPageState extends State<ManageLevelLessonsPage>
       controller: controller,
       maxLines: maxLines,
       validator: validator,
-      style: TextStyle(color: AppTheme.white),
+      style: const TextStyle(color: AppTheme.white),
       decoration: InputDecoration(
         labelText: label,
         hintText: hint,
@@ -500,11 +500,11 @@ class _ManageLevelLessonsPageState extends State<ManageLevelLessonsPage>
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: AppTheme.primaryBlue, width: 2),
+          borderSide: const BorderSide(color: AppTheme.primaryBlue, width: 2),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: Colors.red, width: 2),
+          borderSide: const BorderSide(color: Colors.red, width: 2),
         ),
       ),
     );
@@ -533,6 +533,7 @@ class _ManageLevelLessonsPageState extends State<ManageLevelLessonsPage>
         );
 
         if (levelId != null) {
+          if(!mounted) return;
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
               content: Text('Nivel creado exitosamente'),
@@ -578,7 +579,7 @@ class _ManageLevelLessonsPageState extends State<ManageLevelLessonsPage>
       context: context,
       builder: (context) => AlertDialog(
         backgroundColor: AppTheme.darkBlue,
-        title: Text(
+        title: const Text(
           'Eliminar Nivel',
           style: TextStyle(color: AppTheme.white),
         ),
@@ -589,14 +590,15 @@ class _ManageLevelLessonsPageState extends State<ManageLevelLessonsPage>
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: Text('Cancelar', style: TextStyle(color: AppTheme.white)),
+            child:
+                const Text('Cancelar', style: TextStyle(color: AppTheme.white)),
           ),
           TextButton(
             onPressed: () {
               Navigator.pop(context);
               Navigator.pop(context, true); // Regresar indicando eliminación
             },
-            child: Text('Eliminar', style: TextStyle(color: Colors.red)),
+            child: const Text('Eliminar', style: TextStyle(color: Colors.red)),
           ),
         ],
       ),
@@ -634,7 +636,7 @@ class _ManageLevelLessonsPageState extends State<ManageLevelLessonsPage>
   Widget _buildLessonDialog(String title, VoidCallback onSave) {
     return AlertDialog(
       backgroundColor: AppTheme.backgroundColor,
-      title: Text(title, style: TextStyle(color: AppTheme.white)),
+      title: Text(title, style: const TextStyle(color: AppTheme.white)),
       content: Form(
         key: _lessonFormKey,
         child: SingleChildScrollView(
@@ -718,11 +720,13 @@ class _ManageLevelLessonsPageState extends State<ManageLevelLessonsPage>
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(context),
-          child: Text('Cancelar', style: TextStyle(color: AppTheme.white)),
+          child:
+              const Text('Cancelar', style: TextStyle(color: AppTheme.white)),
         ),
         TextButton(
           onPressed: onSave,
-          child: Text('Guardar', style: TextStyle(color: AppTheme.primaryBlue)),
+          child: const Text('Guardar',
+              style: TextStyle(color: AppTheme.primaryBlue)),
         ),
       ],
     );
@@ -738,6 +742,7 @@ class _ManageLevelLessonsPageState extends State<ManageLevelLessonsPage>
       setState(() {
         _selectedVideoUrl = videoUrl;
       });
+      if(!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Video subido exitosamente'),
@@ -757,6 +762,7 @@ class _ManageLevelLessonsPageState extends State<ManageLevelLessonsPage>
       setState(() {
         _selectedThumbnailUrl = thumbnailUrl;
       });
+      if(!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Imagen subida exitosamente'),

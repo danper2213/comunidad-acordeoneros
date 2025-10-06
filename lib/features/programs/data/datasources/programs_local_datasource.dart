@@ -31,7 +31,7 @@ class ProgramsLocalDataSourceImpl implements ProgramsLocalDataSource {
         isActive: true,
         createdAt: DateTime.now().subtract(const Duration(days: 30)),
         levels: [
-          LevelModel(
+          const LevelModel(
             id: 'level-001',
             name: 'Nivel 1 - Fundamentos',
             description:
@@ -78,7 +78,7 @@ class ProgramsLocalDataSourceImpl implements ProgramsLocalDataSource {
               ),
             ],
           ),
-          LevelModel(
+          const LevelModel(
             id: 'level-002',
             name: 'Nivel 2 - Técnicas Intermedias',
             description:
@@ -113,7 +113,7 @@ class ProgramsLocalDataSourceImpl implements ProgramsLocalDataSource {
               ),
             ],
           ),
-          LevelModel(
+          const LevelModel(
             id: 'level-003',
             name: 'Nivel 3 - Técnicas Avanzadas',
             description:

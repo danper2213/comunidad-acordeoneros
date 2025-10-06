@@ -162,7 +162,7 @@ class _CreateEditProgramPageState extends State<CreateEditProgramPage> {
             padding: const EdgeInsets.all(16),
             child: Row(
               children: [
-                Icon(Icons.image, color: AppTheme.primaryBlue),
+                const Icon(Icons.image, color: AppTheme.primaryBlue),
                 const SizedBox(width: 8),
                 Text(
                   'Imagen del Programa',
@@ -248,7 +248,7 @@ class _CreateEditProgramPageState extends State<CreateEditProgramPage> {
           children: [
             Row(
               children: [
-                Icon(Icons.info_outline, color: AppTheme.primaryBlue),
+                const Icon(Icons.info_outline, color: AppTheme.primaryBlue),
                 const SizedBox(width: 8),
                 Text(
                   'Información Básica',
@@ -317,7 +317,7 @@ class _CreateEditProgramPageState extends State<CreateEditProgramPage> {
       controller: controller,
       maxLines: maxLines,
       validator: validator,
-      style: TextStyle(color: AppTheme.white),
+      style: const TextStyle(color: AppTheme.white),
       decoration: InputDecoration(
         labelText: label,
         hintText: hint,
@@ -336,11 +336,11 @@ class _CreateEditProgramPageState extends State<CreateEditProgramPage> {
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: AppTheme.primaryBlue, width: 2),
+          borderSide: const BorderSide(color: AppTheme.primaryBlue, width: 2),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: Colors.red, width: 2),
+          borderSide: const BorderSide(color: Colors.red, width: 2),
         ),
       ),
     );
@@ -360,7 +360,7 @@ class _CreateEditProgramPageState extends State<CreateEditProgramPage> {
           children: [
             Row(
               children: [
-                Icon(Icons.layers, color: AppTheme.primaryBlue),
+                const Icon(Icons.layers, color: AppTheme.primaryBlue),
                 const SizedBox(width: 8),
                 Text(
                   'Niveles (${_levels.length})',
@@ -379,7 +379,7 @@ class _CreateEditProgramPageState extends State<CreateEditProgramPage> {
                 final index = entry.key;
                 final level = entry.value;
                 return _buildLevelCard(index, level);
-              }).toList(),
+              }),
           ],
         ),
       ),
@@ -464,11 +464,11 @@ class _CreateEditProgramPageState extends State<CreateEditProgramPage> {
           children: [
             IconButton(
               onPressed: () => _editLevel(index),
-              icon: Icon(Icons.edit, color: AppTheme.primaryBlue),
+              icon: const Icon(Icons.edit, color: AppTheme.primaryBlue),
             ),
             IconButton(
               onPressed: () => _removeLevel(index),
-              icon: Icon(Icons.delete, color: Colors.red),
+              icon: const Icon(Icons.delete, color: Colors.red),
             ),
           ],
         ),
@@ -527,12 +527,12 @@ class _CreateEditProgramPageState extends State<CreateEditProgramPage> {
   }
 
   void _addLevel() {
-    // TODO: Navegar a página de crear nivel
+    
     _showAddLevelDialog();
   }
 
   void _editLevel(int index) {
-    // TODO: Navegar a página de editar nivel
+    // Navegar a página de editar nivel
     _showEditLevelDialog(index);
   }
 
@@ -550,7 +550,7 @@ class _CreateEditProgramPageState extends State<CreateEditProgramPage> {
       context: context,
       builder: (context) => AlertDialog(
         backgroundColor: AppTheme.darkBlue,
-        title: Text(
+        title: const Text(
           'Agregar Nivel',
           style: TextStyle(color: AppTheme.white),
         ),
@@ -563,7 +563,7 @@ class _CreateEditProgramPageState extends State<CreateEditProgramPage> {
                 labelText: 'Nombre del nivel',
                 labelStyle: TextStyle(color: AppTheme.white.withOpacity(0.8)),
               ),
-              style: TextStyle(color: AppTheme.white),
+              style: const TextStyle(color: AppTheme.white),
             ),
             const SizedBox(height: 16),
             TextField(
@@ -572,7 +572,7 @@ class _CreateEditProgramPageState extends State<CreateEditProgramPage> {
                 labelText: 'Descripción',
                 labelStyle: TextStyle(color: AppTheme.white.withOpacity(0.8)),
               ),
-              style: TextStyle(color: AppTheme.white),
+              style: const TextStyle(color: AppTheme.white),
               maxLines: 3,
             ),
           ],
@@ -580,7 +580,8 @@ class _CreateEditProgramPageState extends State<CreateEditProgramPage> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: Text('Cancelar', style: TextStyle(color: AppTheme.white)),
+            child:
+                const Text('Cancelar', style: TextStyle(color: AppTheme.white)),
           ),
           TextButton(
             onPressed: () {
@@ -602,8 +603,8 @@ class _CreateEditProgramPageState extends State<CreateEditProgramPage> {
                 Navigator.pop(context);
               }
             },
-            child:
-                Text('Agregar', style: TextStyle(color: AppTheme.primaryBlue)),
+            child: const Text('Agregar',
+                style: TextStyle(color: AppTheme.primaryBlue)),
           ),
         ],
       ),
@@ -620,7 +621,7 @@ class _CreateEditProgramPageState extends State<CreateEditProgramPage> {
       context: context,
       builder: (context) => AlertDialog(
         backgroundColor: AppTheme.darkBlue,
-        title: Text(
+        title: const Text(
           'Editar Nivel',
           style: TextStyle(color: AppTheme.white),
         ),
@@ -633,7 +634,7 @@ class _CreateEditProgramPageState extends State<CreateEditProgramPage> {
                 labelText: 'Nombre del nivel',
                 labelStyle: TextStyle(color: AppTheme.white.withOpacity(0.8)),
               ),
-              style: TextStyle(color: AppTheme.white),
+              style: const TextStyle(color: AppTheme.white),
             ),
             const SizedBox(height: 16),
             TextField(
@@ -642,7 +643,7 @@ class _CreateEditProgramPageState extends State<CreateEditProgramPage> {
                 labelText: 'Descripción',
                 labelStyle: TextStyle(color: AppTheme.white.withOpacity(0.8)),
               ),
-              style: TextStyle(color: AppTheme.white),
+              style: const TextStyle(color: AppTheme.white),
               maxLines: 3,
             ),
           ],
@@ -650,7 +651,8 @@ class _CreateEditProgramPageState extends State<CreateEditProgramPage> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: Text('Cancelar', style: TextStyle(color: AppTheme.white)),
+            child:
+                const Text('Cancelar', style: TextStyle(color: AppTheme.white)),
           ),
           TextButton(
             onPressed: () {
@@ -672,7 +674,7 @@ class _CreateEditProgramPageState extends State<CreateEditProgramPage> {
                 Navigator.pop(context);
               }
             },
-            child: Text('Actualizar',
+            child: const Text('Actualizar',
                 style: TextStyle(color: AppTheme.primaryBlue)),
           ),
         ],
@@ -699,6 +701,7 @@ class _CreateEditProgramPageState extends State<CreateEditProgramPage> {
         );
 
         if (programId != null) {
+          if(!mounted) return;
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
               content: Text('Programa creado exitosamente'),
@@ -720,8 +723,10 @@ class _CreateEditProgramPageState extends State<CreateEditProgramPage> {
           isActive: _isActive,
           levels: _levels,
         );
+        
 
         if (success) {
+          if(!mounted) return;
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
               content: Text('Programa actualizado exitosamente'),

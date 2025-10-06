@@ -61,7 +61,7 @@ class ProgramsCrudProvider extends ChangeNotifier {
         instructor: 'María González',
         isActive: true,
         levels: [
-          LevelEntity(
+          const LevelEntity(
             id: 'level_1',
             name: 'Introducción al Acordeón',
             description:
@@ -92,7 +92,7 @@ class ProgramsCrudProvider extends ChangeNotifier {
             isUnlocked: true,
             progress: 0.3,
           ),
-          LevelEntity(
+          const LevelEntity(
             id: 'level_2',
             name: 'Escalas y Acordes Básicos',
             description:
@@ -126,7 +126,7 @@ class ProgramsCrudProvider extends ChangeNotifier {
         instructor: 'Carlos Mendoza',
         isActive: true,
         levels: [
-          LevelEntity(
+          const LevelEntity(
             id: 'level_3',
             name: 'Acordeón Diatónico',
             description:

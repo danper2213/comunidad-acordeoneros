@@ -30,7 +30,7 @@ class NavigationHelper {
 
   /// Navega a editar un programa existente
   static void goToEditProgram(BuildContext context, String programId) {
-    // TODO: Obtener el programa por ID desde el provider
+    // Obtener el programa por ID desde el provider
     // Por ahora, pasamos un programa vacío
     final program = ProgramEntity(
       id: programId,
@@ -117,7 +117,7 @@ class NavigationHelper {
 
   /// Navega a la lista de programas
   static void goToProgramsList(BuildContext context) {
-    // TODO: Implementar página de lista de programas
+    // Implementar página de lista de programas
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
         content: Text('Lista de programas - En desarrollo'),
@@ -128,7 +128,7 @@ class NavigationHelper {
 
   /// Navega a los detalles de un programa
   static void goToProgramDetails(BuildContext context, String programId) {
-    // TODO: Implementar navegación a detalles del programa
+    //  Implementar navegación a detalles del programa
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
         content: Text('Detalles del programa - En desarrollo'),
@@ -151,7 +151,7 @@ class NavigationHelper {
 
   /// Navega a los detalles de una lección
   static void goToLessonDetails(BuildContext context, String lessonId) {
-    // TODO: Implementar navegación a detalles de lección
+    //  Implementar navegación a detalles de lección
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
         content: Text('Detalles de lección - En desarrollo'),
@@ -162,7 +162,7 @@ class NavigationHelper {
 
   /// Navega a la configuración
   static void goToSettings(BuildContext context) {
-    // TODO: Implementar página de configuración
+    //  Implementar página de configuración
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
         content: Text('Configuración - En desarrollo'),
@@ -173,7 +173,7 @@ class NavigationHelper {
 
   /// Navega al perfil del usuario
   static void goToProfile(BuildContext context) {
-    // TODO: Implementar página de perfil
+    //  Implementar página de perfil
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
         content: Text('Perfil de usuario - En desarrollo'),

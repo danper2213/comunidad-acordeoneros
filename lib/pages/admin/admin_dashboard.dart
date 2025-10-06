@@ -263,7 +263,8 @@ class _AdminDashboardState extends State<AdminDashboard> {
                 ),
                 child: Column(
                   children: [
-                    Icon(Icons.error_outline, color: Colors.red, size: 32),
+                    const Icon(Icons.error_outline,
+                        color: Colors.red, size: 32),
                     const SizedBox(height: 8),
                     Text(
                       'Error al cargar programas',
