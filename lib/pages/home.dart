@@ -5,6 +5,7 @@ import 'package:comunidad_acordeoneros/widgets/separator.dart';
 import 'package:comunidad_acordeoneros/pages/level_lessons_page.dart';
 import 'package:comunidad_acordeoneros/pages/login.dart';
 import 'package:comunidad_acordeoneros/pages/detail_program.dart';
+import 'package:comunidad_acordeoneros/core/router/navigation_helper.dart';
 import 'package:comunidad_acordeoneros/features/programs/presentation/providers/programs_provider.dart';
 import 'package:comunidad_acordeoneros/features/auth/presentation/providers/auth_provider.dart';
 
@@ -92,6 +93,13 @@ class _HomeContent extends StatelessWidget {
             },
             icon: const Icon(Icons.menu),
           ),
+          actions: [
+            IconButton(
+              onPressed: () => NavigationHelper.goToAdminDashboard(context),
+              icon: const Icon(Icons.admin_panel_settings),
+              tooltip: 'Panel de Administración',
+            ),
+          ],
         ),
         body: Container(
           decoration: AppTheme.getBackgroundDecoration(),

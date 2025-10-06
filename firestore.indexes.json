@@ -1,0 +1,128 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "programs",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "isActive",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "createdAt",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "programs",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "instructor",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "createdAt",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "levels",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "programId",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "order",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "lessons",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "levelId",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "order",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "lessons",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "programId",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "order",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "comments",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "programId",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "createdAt",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "userProgress",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "userId",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "programId",
+          "order": "ASCENDING"
+        }
+      ]
+    }
+  ],
+  "fieldOverrides": [
+    {
+      "collectionGroup": "programs",
+      "fieldPath": "name",
+      "indexes": [
+        {
+          "order": "ASCENDING",
+          "queryScope": "COLLECTION"
+        },
+        {
+          "arrayConfig": "CONTAINS",
+          "queryScope": "COLLECTION"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "programs",
+      "fieldPath": "instructor",
+      "indexes": [
+        {
+          "order": "ASCENDING",
+          "queryScope": "COLLECTION"
+        }
+      ]
+    }
+  ]
+}

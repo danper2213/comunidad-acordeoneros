@@ -60,4 +60,33 @@ class LevelModel extends LevelEntity {
       progress: progress ?? this.progress,
     );
   }
+
+  /// Convierte de Entity a Model
+  static LevelModel fromEntity(LevelEntity entity) {
+    return LevelModel(
+      id: entity.id,
+      name: entity.name,
+      description: entity.description,
+      order: entity.order,
+      lessons: entity.lessons
+          .map((lesson) => LessonModel.fromEntity(lesson))
+          .toList(),
+      isUnlocked: entity.isUnlocked,
+      progress: entity.progress,
+    );
+  }
+
+  /// Convierte de Model a Entity
+  LevelEntity toEntity() {
+    return LevelEntity(
+      id: id,
+      name: name,
+      description: description,
+      order: order,
+      lessons:
+          lessons.map((lesson) => (lesson as LessonModel).toEntity()).toList(),
+      isUnlocked: isUnlocked,
+      progress: progress,
+    );
+  }
 }

@@ -1,5 +1,6 @@
 import 'package:comunidad_acordeoneros/features/programs/domain/entities/program_entity.dart';
 import 'package:comunidad_acordeoneros/features/programs/data/models/level_model.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ProgramModel extends ProgramEntity {
   const ProgramModel({
@@ -27,10 +28,9 @@ class ProgramModel extends ProgramEntity {
           [],
       isActive: json['isActive'] as bool? ?? true,
       instructor: json['instructor'] as String,
-      createdAt: DateTime.parse(json['createdAt'] as String),
-      updatedAt: json['updatedAt'] != null
-          ? DateTime.parse(json['updatedAt'] as String)
-          : null,
+      createdAt: _parseDateTime(json['createdAt']),
+      updatedAt:
+          json['updatedAt'] != null ? _parseDateTime(json['updatedAt']) : null,
     );
   }
 
@@ -70,5 +70,58 @@ class ProgramModel extends ProgramEntity {
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
     );
+  }
+
+  /// Convierte de Entity a Model
+  static ProgramModel fromEntity(ProgramEntity entity) {
+    return ProgramModel(
+      id: entity.id,
+      name: entity.name,
+      description: entity.description,
+      imageUrl: entity.imageUrl,
+      levels:
+          entity.levels.map((level) => LevelModel.fromEntity(level)).toList(),
+      isActive: entity.isActive,
+      instructor: entity.instructor,
+      createdAt: entity.createdAt,
+      updatedAt: entity.updatedAt,
+    );
+  }
+
+  /// Convierte de Model a Entity
+  ProgramEntity toEntity() {
+    return ProgramEntity(
+      id: id,
+      name: name,
+      description: description,
+      imageUrl: imageUrl,
+      levels: levels.map((level) => (level as LevelModel).toEntity()).toList(),
+      isActive: isActive,
+      instructor: instructor,
+      createdAt: createdAt,
+      updatedAt: updatedAt,
+    );
+  }
+
+  /// Helper method para parsear DateTime desde Firestore
+  static DateTime _parseDateTime(dynamic dateValue) {
+    if (dateValue == null) {
+      return DateTime.now();
+    }
+
+    if (dateValue is Timestamp) {
+      return dateValue.toDate();
+    }
+
+    if (dateValue is String) {
+      return DateTime.parse(dateValue);
+    }
+
+    if (dateValue is DateTime) {
+      return dateValue;
+    }
+
+    // Fallback
+    return DateTime.now();
   }
 }

@@ -1,0 +1,85 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Reglas para la colección de programas
+    match /programs/{programId} {
+      // Permitir lectura a todos los usuarios autenticados
+      allow read: if request.auth != null;
+      
+      // Permitir escritura solo a administradores (por ahora, cualquier usuario autenticado)
+      // En producción, deberías implementar un sistema de roles más robusto
+      allow write: if request.auth != null 
+        && resource == null; // Solo permitir creación de nuevos documentos
+      
+      allow update, delete: if request.auth != null;
+      
+      // Validaciones para campos requeridos al crear
+      allow create: if request.auth != null
+        && request.resource.data.keys().hasAll(['id', 'name', 'description', 'instructor', 'imageUrl', 'isActive', 'levels', 'createdAt', 'updatedAt'])
+        && request.resource.data.name is string
+        && request.resource.data.description is string
+        && request.resource.data.instructor is string
+        && request.resource.data.imageUrl is string
+        && request.resource.data.isActive is bool
+        && request.resource.data.levels is list
+        && request.resource.data.createdAt is timestamp
+        && request.resource.data.updatedAt is timestamp;
+    }
+    
+    // Reglas para la colección de niveles
+    match /levels/{levelId} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null;
+      
+      // Validaciones para campos requeridos
+      allow create: if request.auth != null
+        && request.resource.data.keys().hasAll(['id', 'programId', 'name', 'description', 'order', 'isUnlocked', 'progress', 'lessons', 'createdAt', 'updatedAt'])
+        && request.resource.data.programId is string
+        && request.resource.data.name is string
+        && request.resource.data.description is string
+        && request.resource.data.order is int
+        && request.resource.data.isUnlocked is bool
+        && request.resource.data.progress is number
+        && request.resource.data.lessons is list;
+    }
+    
+    // Reglas para la colección de lecciones
+    match /lessons/{lessonId} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null;
+      
+      // Validaciones para campos requeridos
+      allow create: if request.auth != null
+        && request.resource.data.keys().hasAll(['id', 'programId', 'levelId', 'title', 'description', 'videoUrl', 'duration', 'order', 'isCompleted', 'views', 'createdAt', 'updatedAt'])
+        && request.resource.data.programId is string
+        && request.resource.data.levelId is string
+        && request.resource.data.title is string
+        && request.resource.data.description is string
+        && request.resource.data.videoUrl is string
+        && request.resource.data.duration is int
+        && request.resource.data.order is int
+        && request.resource.data.isCompleted is bool
+        && request.resource.data.views is int;
+    }
+    
+    // Reglas para comentarios (si los implementas)
+    match /comments/{commentId} {
+      allow read: if request.auth != null;
+      allow create: if request.auth != null
+        && request.resource.data.userId == request.auth.uid;
+      allow update, delete: if request.auth != null
+        && request.resource.data.userId == request.auth.uid;
+    }
+    
+    // Reglas para usuarios (perfil de usuario)
+    match /users/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+    
+    // Reglas para progreso de usuario
+    match /userProgress/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+  }
+}

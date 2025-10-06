@@ -64,4 +64,34 @@ class LessonModel extends LessonEntity {
       views: views ?? this.views,
     );
   }
+
+  /// Convierte de Entity a Model
+  static LessonModel fromEntity(LessonEntity entity) {
+    return LessonModel(
+      id: entity.id,
+      title: entity.title,
+      description: entity.description,
+      videoUrl: entity.videoUrl,
+      thumbnailUrl: entity.thumbnailUrl,
+      duration: entity.duration,
+      order: entity.order,
+      isCompleted: entity.isCompleted,
+      views: entity.views,
+    );
+  }
+
+  /// Convierte de Model a Entity
+  LessonEntity toEntity() {
+    return LessonEntity(
+      id: id,
+      title: title,
+      description: description,
+      videoUrl: videoUrl,
+      thumbnailUrl: thumbnailUrl,
+      duration: duration,
+      order: order,
+      isCompleted: isCompleted,
+      views: views,
+    );
+  }
 }
